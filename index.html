@@ -4,11 +4,11 @@
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Multimarkdown-4-lyx-maintenance : C implementation of MultiMarkdown; almost complete rewrite of MMD 3 (which was aka &quot;peg-multimarkdown&quot;)." />
+    <meta name="description" content="Multimarkdown-lyx : Convert MultiMarkdown taged files directly to LyX" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Multimarkdown-4-lyx-maintenance</title>
+    <title>Multimarkdown-lyx</title>
   </head>
 
   <body>
@@ -16,14 +16,17 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/crcowan/MultiMarkdown-4-LyX-Maintenance">View on GitHub</a>
+          <a id="forkme_banner" href="https://github.com/crcowan/MultiMarkdown-4-LyX-Maintenance forked from fletcher/MultiMarkdown-4
+">View on GitHub</a>
 
-          <h1 id="project_title">Multimarkdown-4-lyx-maintenance</h1>
-          <h2 id="project_tagline">C implementation of MultiMarkdown; almost complete rewrite of MMD 3 (which was aka &quot;peg-multimarkdown&quot;).</h2>
+          <h1 id="project_title">Multimarkdown-lyx</h1>
+          <h2 id="project_tagline">Convert MultiMarkdown taged files directly to LyX</h2>
 
             <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/crcowan/MultiMarkdown-4-LyX-Maintenance/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/crcowan/MultiMarkdown-4-LyX-Maintenance/tarball/master">Download this project as a tar.gz file</a>
+              <a class="zip_download_link" href="https://github.com/crcowan/MultiMarkdown-4-LyX-Maintenance forked from fletcher/MultiMarkdown-4
+/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/crcowan/MultiMarkdown-4-LyX-Maintenance forked from fletcher/MultiMarkdown-4
+/tarball/master">Download this project as a tar.gz file</a>
             </section>
         </header>
     </div>
@@ -31,44 +34,84 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h1>
+<a name="welcome-to-multimarkdown-to-lyx" class="anchor" href="#welcome-to-multimarkdown-to-lyx"><span class="octicon octicon-link"></span></a>Welcome to MultiMarkdown to LyX.</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>While the information below is an introduction to MultiMarkdown to LyX, please make sure to read this full documentation in order to understand the difference between the LyX version and standard MultiMarkdown:
+<a href="Doc/MultiMarkdown%20to%20Lyx.pdf">MultiMarkdown to LyX PDF documentation</a> (<a href="Doc/MultiMarkdown%20to%20Lyx.mmd">and the MultiMarkdown version</a>).</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<h1>
+<a name="what-is-multimarkdown-to-lyx" class="anchor" href="#what-is-multimarkdown-to-lyx"><span class="octicon octicon-link"></span></a>What is MultiMarkdown to LyX?</h1>
+
+<p>MultiMarkdown to LyX is an enhancement to MultiMarkdown that allows the production of a <code>.lyx</code> file. These files can be opened directly in LyX. As described on their web page:</p>
+
+<blockquote>
+<p>LyX is a document processor that encourages an approach to writing based on the <em>structure</em> of your documents (WYSIWYM) and not simply their appearance (WYSIWYG).</p>
+
+<p>LyX combines the power and flexibility of TeX/LaTeX with the ease of use of a graphical interface. This results in world-class support for creation of mathematical content (via a fully integrated equation editor) and structured documents like academic articles, theses, and books. In addition, staples of scientific authoring such as reference list and index creation come standard. But you can also use LyX to create a letter or a novel or a theatre play or film script. A broad array of ready, well-designed document layouts are built in. (<a href="http://www.lyx.org">http://www.lyx.org</a>)</p>
+</blockquote>
+
+<p>MultiMarkdown already provides LaTeX support, so you may ask, why provide LyX output? There are two key areas where LyX stands out:</p>
+
+<ol>
+<li>
+<p>Editing and "Tweaking" the LaTeX product. While MultiMarkdown is powerful, it can’t support
+all of the capabilities of LaTeX. LyX provides a structured editing environment that will allow 
+modifications to the final output without being a LaTeX expert. In addition it will make it easier to 
+adapt to other document classes, beyond Memoir and Beamer. For example, I really like this "Tufte-
+Handout" class.</p>
+
+<blockquote>
+<p>Inspired by Edward Tufte, author of four beautiful books on design: 
+<a href="http://www.edwardtufte.com/tufte/">http://www.edwardtufte.com/tufte/</a>. 
+More information on the <code>tufte-handout</code> class here: <a href="http://wiki.lyx.org/Layouts/Tufte-handout">http://wiki.lyx.org/Layouts/Tufte-handout</a></p>
+</blockquote>
+</li>
+<li><p>Easy choice of output formats. The <code>view</code> and <code>export</code> functions of LyX provide a large number of
+output choices to include PDF, postscript, DVI, different HTML formats, and rich text. For example, 
+the output to HTML using eLyXer is very attractive.</p></li>
+</ol><p>Please note that the vast majority of my work has been using the LyX <code>PDF (LuaTeX)</code> output processor and have been successful. Given the packages utilized, with other output processors "your mileage may vary."</p>
+
+<h1>
+<a name="how-do-i-use-multimarkdown-to-lyx" class="anchor" href="#how-do-i-use-multimarkdown-to-lyx"><span class="octicon octicon-link"></span></a>How do I use MultiMarkdown to LyX?</h1>
+
+<p>The LyX support is built into MultiMarkdown. You specify LyX output using the command line option <code>-t</code> or <code>--to</code> and specifying "lyx":</p>
+
+<pre><code>    multimarkdown -t lyx
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>In general, the metadata in the MultiMarkdown file will control the details of creating the <code>.lyx</code> file.</p>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<h2>
+<a name="latex-packages" class="anchor" href="#latex-packages"><span class="octicon octicon-link"></span></a>LaTeX Packages</h2>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>Depending on the needs of the document class you are using and some of the metadata options, particular classes will be required.</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<p>MultiMarkdown to LyX assumes the following packages and will add them to the <code>latex preamble</code> of the LyX document settings dialog:</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<ul>
+<li>listings -- used in formatting codeblocks</li>
+<li>natbib</li>
+<li>nomencl</li>
+<li>booktabs</li>
+<li>beamer-fragile (only if you are using Beamer)</li>
+<li>varioref -- to improve page references in links</li>
+</ul><p>Be sure that these packages are installed in your LaTeX configuration before you attempt to produce output from LyX.</p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<p>In addition to the packages automatically included by MultiMarkdown, you can request that additional packages be added to this list via the <code>Packages</code> metadata entry.</p>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<h1>
+<a name="read-the-full-documentation" class="anchor" href="#read-the-full-documentation"><span class="octicon octicon-link"></span></a>Read the full documentation</h1>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>As stated above, please make sure to read this full documentation in order to understand the difference between the LyX version and standard MultiMarkdown:
+<a href="Doc/MultiMarkdown%20to%20Lyx.pdf">MultiMarkdown to LyX PDF documentation</a></p>
       </section>
     </div>
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p class="copyright">Multimarkdown-4-lyx-maintenance maintained by <a href="https://github.com/crcowan">crcowan</a></p>
+        <p class="copyright">Multimarkdown-lyx maintained by <a href="https://github.com/crcowan">crcowan</a></p>
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
