@@ -1,0 +1,556 @@
+{\rtf1\ansi\deff0 {\fonttbl
+{\f0\froman Times New Roman;}
+{\f1\fswiss Arial;}
+{\f2\fmodern Courier New;}
+}
+{\stylesheet
+{\s0 \qj\sa180\f0\fs24 Normal;}
+{\s1 \f1\fs32\ql\sb240\sa180\b Header 1;}
+{\s2 \f1\fs28\ql\sb240\sa180\i\b Header 2;}
+{\s3 \f1\fs28\ql\sb240\sa180\b Header 3;}
+{\s4 \f1\fs24\ql\sb240\sa180\i\b Header 4;}
+{\s5 \f1\fs24\ql\sb240\sa180\b Header 5;}
+{\s6 \f1\fs22\ql\sb240\sa180\b Header 6;}
+{\s7 \qj\sa180\f0\fs24\li720\ri720 Quotation;}
+{\s7 \qj\sa180\f0\fs24\li360\ri360 Note;}
+}
+\margt1150\margb1150\margl1150\margr1150
+{\info
+{\title MultiMarkdown to <!-- L\\kern-.1667em\\lower.25em\\hbox\{Y\}\\kern-.125emX\\ -->}
+{\author C. R. Cowan}
+}
+
+
+{\pard \s1 \f1\fs32\ql\sb240\sa180\b {\*\bkmkstart whatismultimarkdowntolyx}{\*\bkmkend whatismultimarkdowntolyx}What is MultiMarkdown to LyX?\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 MultiMarkdown to LyX is an enhancement to MultiMarkdown that allows the production of a  file. These files can be opened directly in LyX. As described on their web page:
+\par}
+
+
+
+{\pard \s7 \qj\sa180\f0\fs24\li720\ri720 LyX is a document processor that encourages an approach to writing based on the {\i structure} of your documents (WYSIWYM) and not simply their appearance (WYSIWYG). 
+\par}
+
+{\pard \s7 \qj\sa180\f0\fs24\li720\ri720 LyX combines the power and flexibility of TeX/LaTeX with the ease of use of a graphical interface. This results in world-class support for creation of mathematical content (via a fully integrated equation editor) and structured documents like academic articles, theses, and books. In addition, staples of scientific authoring such as reference list and index creation come standard. But you can also use LyX to create a letter or a novel or a theatre play or film script. A broad array of ready, well-designed document layouts are built in.{\super\chftn}{\footnote\pard\plain\chtfn {\pard \s7 \qj\sa180\f0\fs24\li720\ri720 {\field{\*\fldinst{HYPERLINK "http://www.lyx.org"}}{\fldrslt http://www.lyx.org}}
+\par}
+}
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 MultiMarkdown already provides LaTeX support, so you may ask, why provide LyX output? There are two key areas where LyX stands out:
+\par}
+
+{\listtext \'95 }
+
+{\pard \s0 \qj\sa180\f0\fs24 Editing and \'93Tweaking\'94 the LaTeX product. While MultiMarkdown is powerful, it can’t support all of the capabilities of LaTeX. LyX provides a structured editing environment that will allow modifications to the final output without being a LaTeX expert. In addition it will make it easier to adapt to other document classes, beyond Memoir and Beamer. For example, I really like this \'93Tufte-Handout\'94 class.{\super\chftn}{\footnote\pard\plain\chtfn {\pard \s0 \qj\sa180\f0\fs24 Inspired by Edward Tufte, author of four beautiful books on design: {\field{\*\fldinst{HYPERLINK "http://www.edwardtufte.com/tufte/"}}{\fldrslt http://www.edwardtufte.com/tufte/}}\line More information on the  class here: {\field{\*\fldinst{HYPERLINK "http://wiki.lyx.org/Layouts/Tufte-handout"}}{\fldrslt http://wiki.lyx.org/Layouts/Tufte-handout}}
+\par}
+}
+\par}
+{\listtext \'95 }
+{\pard \s0 \qj\sa180\f0\fs24 Easy choice of output formats. The  and  functions of LyX provide a large number of output choices to include PDF, postscript, DVI, different HTML formats, and rich text. For example, the output to HTML using eLyXer is very attractive.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Please note that the vast majority of my work has been using the LyX  output processor and have been successful. Given the packages utilized, with other output processors \'93your mileage may vary.\'94
+\par}
+
+{\pard \s1 \f1\fs32\ql\sb240\sa180\b {\*\bkmkstart howdoiusemultimarkdowntolyx}{\*\bkmkend howdoiusemultimarkdowntolyx}How do I use MultiMarkdown to LyX?\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The LyX support is built into MultiMarkdown. You specify LyX output using the command line option  or  and specifying \'93lyx\'94:
+\par}
+
+{\pard \s7 \qj\sa180\f2\fs20\li360\ri360 multimarkdown -t lyx\
+
+\par}
+
+
+{\pard \s0 \qj\sa180\f0\fs24 In general, the metadata in the MultiMarkdown file will control the details of creating the  file.
+\par}
+
+{\pard \s2 \f1\fs28\ql\sb240\sa180\i\b {\*\bkmkstart latexpackages}{\*\bkmkend latexpackages}LaTeX Packages\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Depending on the needs of the document class you are using and some of the metadata options, particular classes will be required.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 MultiMarkdown to LyX assumes the following packages and will add them to the  of the LyX document settings dialog:
+\par}
+
+\ls1\ilvl0 {\listtext \'95 }listings \'96 used in formatting codeblocks\
+{\listtext \'95 }natbib\
+{\listtext \'95 }nomencl\
+{\listtext \'95 }booktabs\
+{\listtext \'95 }beamer-fragile (only if you are using Beamer)\
+{\listtext \'95 }varioref \'96 to improve page references in links\
+
+
+{\pard \s0 \qj\sa180\f0\fs24 Be sure that these packages are installed in your LaTeX configuration before you attempt to produce output from LyX.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 In addition to the packages automatically included by MultiMarkdown, you can request that additional packages be added to this list via the  metadata entry (see {\field{\*\fldinst{HYPERLINK "#packages"}}{\fldrslt {\i Packages}}}).
+\par}
+
+{\pard \s1 \f1\fs32\ql\sb240\sa180\b {\*\bkmkstart whatisdifferentaboutlyxdocuments}{\*\bkmkend whatisdifferentaboutlyxdocuments}What is different about LyX documents?\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 When you are creating a document that will be processed by LyX there are some differences from normal MultiMarkdown processing \'96 and even LaTeX targeted MultiMarkdown.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Most of the differences are managed by utilizing the metadata at the beginning of the MultiMarkdown document. These options are described in {\field{\*\fldinst{HYPERLINK "#metadata"}}{\fldrslt {\i MetaData}}}.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Because of the way LyX utilizes BibTeX, and to remain consistent with BibTeX formatting, the formatting of citations is a bit constrained.
+\par}
+
+{\pard \s2 \f1\fs28\ql\sb240\sa180\i\b {\*\bkmkstart metadata}{\*\bkmkend metadata}MetaData\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The LyX processor only looks at particular metadata entries. Other entries not described below are ignored, and you can leave them in place if you will be switching to other processors.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 It also re-uses some of the LaTeX metadata entries to the same purpose as the LaTeX processor with a similar effect, but perhaps without all of the options.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart abstract}{\*\bkmkend abstract}Abstract\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The  metadata encloses the value provided in the LyX  environment. It will be placed in the document as defined by the document class.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart affiliation}{\*\bkmkend affiliation}Affiliation\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The  metadata encloses the value provided in the LyX  environment. It will be placed in the document as defined by the document class. This metadata entry is {\i only} processed for the  class.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart author}{\*\bkmkend author}Author\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The  metadata encloses the value provided in the LyX  environment. It will be placed in the document as defined by the document class.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart baseheaderlevel}{\*\bkmkend baseheaderlevel}Base Header Level\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The  metadata element for LyX provides the same function as that element for LaTeX. The value defines the level within the LyX class that maps to the highest level (one hash mark) in the MultiMarkdown.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 This metadata element can be used in conjunction with the  element.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart bibtex}{\*\bkmkend bibtex}Bibtex\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The  metadata entry specifies the name of the BibTeX database to use for citations.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart classoptions}{\*\bkmkend classoptions}Class Options\par}
+
+{\pard \s0 \qj\sa180\f0\fs24  is a convince feature. It consists of a comma separated list of options for the particular class chosen using the  metadata entry.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 This entry allows the specification in the MultiMarkdown metadata so that it does not have to be specified in LyX each time the MultiMarkdown file is processed.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart cleanpdf}{\*\bkmkend cleanpdf}Clean PDF\par}
+
+{\pard \s0 \qj\sa180\f0\fs24  is a convenience feature that adds  to the class options. This removes the rather ugly magenta and cyan boxes around links in PDF files. The links still function but the outline is gone.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Instead of using this MetaData entry, you could add  to the  MetaData entry if you prefer.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 This entry allows the specification in the MultiMarkdown metadata so that it does not have to be specified in LyX each time the MultiMarkdown file is processed.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart date}{\*\bkmkend date}Date\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The  metadata encloses the value provided in the LyX  environment. It will be placed in the document as defined by the document class.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart latexinput}{\*\bkmkend latexinput}LaTeX Input\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 While the  metadata entry for LyX looks similar to the entry for LaTeX, it really only has one function for LyX. Since natbib is used by default in LyX, either citations need to be compatible with \'91Author-Year\'92 (see {\field{\*\fldinst{HYPERLINK "#citations"}}{\fldrslt {\i Citations}}}) or you can specify the value  for . This changes the citation style in natbib to numeric to avoid errors. This is the same as is described in the MultiMarkdown User\'27s Guide{\super\chftn}{\footnote\pard\plain\chtfn {\pard \s0 \qj\sa180\f0\fs24 Fletcher T. Penny
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 {\field{\*\fldinst{HYPERLINK "http://fletcherpenny.net/mmd"}}{\fldrslt http://fletcherpenny.net/mmd}}
+\par}
+}.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 {\b Note} that use of this metadata entry with LyX {\i does not} include the contents of the  file in the LyX document. It simply changes the citation style.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart latexmode}{\*\bkmkend latexmode}Latex Mode\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The LyX  metadata entry is very similar to the LaTeX entry. In both cases it selects the type of formatting to be performed and both default to . They key difference is that the LyX version is really a LyX class. These tend to have the same name as their LaTeX counterpart.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 In this case the value supplied {\i must} be the file name of a  file in the LyX  directory. That name may not match the text in the \'96> dialog. You may need to browse that directory to find the proper filename. Just use the  portion of the filename and don\'27t include the  extention.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 For example the correct value for \'93memoir\'94 is , for \'93beamer\'94 is  and for \'93handout (tufte)\'94 is .
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Because of the flexibility of using the  metadata entry, you should be able to accommodate many of the available LyX classes. Of course, there may be features of those classes you don\'27t have access to through MultiMarkdown, but once you have your \'93draft\'94 from MultiMarkdown loaded into LyX you can make further editing changes and take advantage of the full capabilities of the class.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Using  as a value for  is a special case. This, indeed, will select the LyX  class. But, because beamer is a rather unique LaTeX/LyX class, it utilizes special processing during the MultiMarkdown LyX conversion. Therefore, for the  case, the  metadata entry is ignored.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart lyxheadings}{\*\bkmkend lyxheadings}Lyx Headings\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 When MultiMarkdown is used to create LaTeX output, users have a metadata entry called  which controls which MultiMarkdown heading level corresponds to a LayTeX heading level. The  defines how far down the LaTeX hierarchy the first MultiMarkdown level corresponds.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Because the LyX support is intended to encompass a broader set of LyX classes than just Memoir and Beamer, a metadata entry called  is provided. The value is a comma separated list of LyX environments in order from the highest level to the lowest level. Up to seven levels can be provided. If fewer than seven items are provided, they replace the equivalent number with the rest remaining the defaults.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The default set are:
+\par}
+
+{\listtext \'95 }Part\
+{\listtext \'95 }Chapter\
+{\listtext \'95 }Section\
+{\listtext \'95 }Subsection\
+{\listtext \'95 }Subsubsection\
+{\listtext \'95 }Paragraph\
+{\listtext \'95 }Subparagraph\
+
+
+{\pard \s0 \qj\sa180\f0\fs24 While this is fine for Memoir and many other classes, it is not appropriate for others. For example, to use the  class I supplied the metadata entry:
+\par}
+
+{\pard \s7 \qj\sa180\f2\fs20\li360\ri360 Lyx Headings: Part, Section, Subsection\
+
+\par}
+
+
+{\pard \s0 \qj\sa180\f0\fs24 This results in a LyX environment heirarchy of:
+\par}
+
+{\listtext \'95 }Part\
+{\listtext \'95 }Section\
+{\listtext \'95 }Subsection\
+{\listtext \'95 }Subsection\
+{\listtext \'95 }Subsubsection\
+{\listtext \'95 }Paragraph\
+{\listtext \'95 }Subparagraph\
+
+
+{\pard \s0 \qj\sa180\f0\fs24  is thus missing and matches the  class. Since I am only using three levels it is sufficient to leave the other entries as they are.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Please note that these items are case sensitive and must match the way that the environments appear in the environment selection dropdown. Do not append an asterisk to the environment name unless you provide the metadata  value of . Otherwise two asterisks will appear. I recommend that you do not provide asterisks in this list and use the  to control numbering.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Keep in mind that you can also use  as well to control the mapping of the first level in the MultiMarkdown to a lower level in the LyX environment hierarchy.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart modules}{\*\bkmkend modules}Modules\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The  metadata entry is a convenience feature. The value for this metadata is a comma separated list of  file names. The value supplied {\i must} be the file name of a  file in the LyX  directory. Each entry will appear in the LyX document settings  section. {\b Note} that this is the file name of the module file {\i not} the text that appears in the LyX document settings  section. For example if you want the module described in the dialog as  you must specify .
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 This entry allows the specification in the MultiMarkdown metadata so that it does not have to be specified in LyX each time the MultiMarkdown file is processed.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart numberheadings}{\*\bkmkend numberheadings}Number Headings\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 LyX users can choose to have headings automatically numbered, or they can remain unnumbered. In LyX this is done by selecting an \'93environment\'94 with or without a trailing asterisk. Environments without an asterisk are numbered, those with an asterisk are not numbered.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Thus choosing the  environment results in a numbered header and choosing the  environment results in an unnumbered heading.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 In MultiMarkdown this is controlled with the  metadata entry. If a value of  is provided, headings are not numbered. Any other value (or not providing this metadata entry) results in numbering the headers.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 If numbering is requested, links will reference the numbering associated with the target of the reference. If numbering is turned off, appropriate links to the text of the target will be used.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Please note that if you turn off numbering, and use LyX to create a PDF file, it will not have table of contents bookmarks, making your PDF more difficult to navigate.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart packages}{\*\bkmkend packages}Packages\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The  metadata entry is a convenience feature. The value for this metadata is a comma separated list of package names. Each name will appear in the LyX document settings  section in the format  where  is the name of the package specified.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 This entry allows the specification in the MultiMarkdown metadata so that it does not have to be specified in LyX each time the MultiMarkdown file is processed.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart quoteslanguage}{\*\bkmkend quoteslanguage}Quotes Language\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 This is used to specify which style of “smart” quotes to use in the output document. The 
+
+available options are:
+\par}
+
+\ls1\ilvl0 {\listtext \'95 }
+
+{\pard \s0 \qj\sa180\f0\fs24 dutch
+\par}
+{\listtext \'95 }
+{\pard \s0 \qj\sa180\f0\fs24 english
+\par}
+{\listtext \'95 }
+{\pard \s0 \qj\sa180\f0\fs24 french
+\par}
+{\listtext \'95 }
+{\pard \s0 \qj\sa180\f0\fs24 german
+\par}
+{\listtext \'95 }
+{\pard \s0 \qj\sa180\f0\fs24 germanguillemets
+\par}
+{\listtext \'95 }
+{\pard \s0 \qj\sa180\f0\fs24 swedish
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The default is english if not specified.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart subtitle}{\*\bkmkend subtitle}Sub Title\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The  metadata encloses the value provided in the LyX  environment. It will be placed in the document as defined by the document class. This metadata entry is {\i only} processed for the  class.
+\par}
+
+{\pard \s3 \f1\fs28\ql\sb240\sa180\b {\*\bkmkstart theme}{\*\bkmkend theme}Theme\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The  metadata entry for LyX has exactly the same function as for LaTeX \'96 it specifies the Beamer theme to be used for the creation of Beamer slides. This metadata entry is only used if  is the metadata value for .
+\par}
+
+{\pard \s2 \f1\fs28\ql\sb240\sa180\i\b {\*\bkmkstart citations}{\*\bkmkend citations}Citations\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Because LyX uses natbib, in order to be compatible citations must be in a particular format known as the \'91Author-Year\'92 format. This format requires the Author\'27s last name followed by the year in parenthesis.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The example in the MultiMarkdown User\'27s guide:
+\par}
+
+{\pard \s7 \qj\sa180\f2\fs20\li360\ri360 This is a statement that could be attributed to its source [p. 23][#Doe:2006]\
+\
+And following is the description of the reference to be used in the bibliography.\
+\
+[#Doe:2006]: John Doe. *Some Big Fancy Book*. Vanity Press, 2006.\
+
+\par}
+
+
+{\pard \s0 \qj\sa180\f0\fs24 Would be re-written as:
+\par}
+
+{\pard \s7 \qj\sa180\f2\fs20\li360\ri360 This is a statement that could be attributed to its source [p. 23][#Doe (2006)]\
+\
+And following is the description of the reference to be used in the bibliography.\
+\
+[#Doe (2006)]: John Doe. *Some Big Fancy Book*. Vanity Press, 2006.\
+
+\par}
+
+
+{\pard \s0 \qj\sa180\f0\fs24 Resulting in:
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 This is a statement that could be attributed to its source {\super\chftn}{\footnote\ftnalt\pard\plain\chtfn {\pard \s7 \qj\sa180\f0\fs24\li360\ri360 John Doe. {\i Some Big Fancy Book}. Vanity Press, 2006.
+\par}
+}
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Alternatively you could use the  metadata element described in {\field{\*\fldinst{HYPERLINK "#latexinput"}}{\fldrslt {\i LaTeX Input}}} to change the citation style to numbers.
+\par}
+
+{\pard \s2 \f1\fs28\ql\sb240\sa180\i\b {\*\bkmkstart tables}{\*\bkmkend tables}Tables\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The standard LaTeX footnote command  doesn\'27t work in normal tables{\super\chftn}{\footnote\pard\plain\chtfn {\pard \s0 \qj\sa180\f0\fs24 For LyX see {\field{\*\fldinst{HYPERLINK "http://wiki.lyx.org/LyX/Tables#footintab"}}{\fldrslt http://wiki.lyx.org/LyX/Tables#footintab}}\line For LaTeX see {\field{\*\fldinst{HYPERLINK "http://www.tex.ac.uk/cgi-bin/texfaq2html?label=footintab"}}{\fldrslt http://www.tex.ac.uk/cgi-bin/texfaq2html?label=footintab}}
+\par}
+}. Therefore, when MultiMarkdown converts a document to LyX format, all tables that are created are LyX \'93long tables.\'94 Not only do long tables support proper footnotes, they also can span pages if required. LyX provides a number of options for controlling long tables and you can take advantages of these once in the LyX environment. MultiMarkdown sets the expected default options.
+\par}
+
+{\pard \s2 \f1\fs28\ql\sb240\sa180\i\b {\*\bkmkstart captions}{\*\bkmkend captions}Captions\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Unfortunately, LyX doesn\'27t support footnotes in captions. MultiMarkdown to LyX will place the footnote in the LyX file in the event that LyX elects to support footnotes in captions but they will not appear in the current implementation. 
+\par}
+
+{\pard \s2 \f1\fs28\ql\sb240\sa180\i\b {\*\bkmkstart linksandlabels}{\*\bkmkend linksandlabels}Links and Labels\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 LyX MultiMarkdown generates a LyX label for every heading, image, etc. In LyX these labels look a bit ungainly, mostly looking like all of the text lowercased and strung together. Don\'27t worry about that. If you edit in LyX you can still find the label when you insert a cross-reference. LyX MultiMarkdown properly proceeds all of the labels generated with a prefix that describes the type of label. For example  for a figure or  for a section.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 If you stick with cross-referencing in MultiMarkdown, you have the advantage of being able to use a nice format for the reference. For example, should you use this cross-reference in this document:
+\par}
+
+{\pard \s7 \qj\sa180\f2\fs20\li360\ri360 You will find more information about this tool in [*What is MultiMarkdown to LyX?*][]\
+
+\par}
+
+
+{\pard \s0 \qj\sa180\f0\fs24 It will appear like this:
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 You will find more information about this tool in {\field{\*\fldinst{HYPERLINK "#whatismultimarkdowntolyx"}}{\fldrslt {\i What is MultiMarkdown to LyX?}}}.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Note the italics.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 If you use the  metadata entry to turn off numbering, LyX MultiMarkdown will place a reference to the name of the labeled item in quotes and linked to the labeled item.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Note that the  package is used to create page references and  statements are provided in the  section of the LyX  dialog. You can modify these if required.
+\par}
+
+{\pard \s2 \f1\fs28\ql\sb240\sa180\i\b {\*\bkmkstart codeblocksandfencedcodeblocks}{\*\bkmkend codeblocksandfencedcodeblocks}Code Blocks and Fenced Code Blocks\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Code blocks and Fenced Code Blocks are implemented using the LaTeX \'93Listings\'94 package. Basic settings for listing are used and you can \'93tweak\'94 those (such as including line numbers) by opening the  of the inset in LyX and making changes in the dialog box.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 If you choose to use Fenced Code Blocks, you can specify a language to provide syntax highlighting. The language specified (following the three \'91tic\'92 marks) is case sensitive and must match the way the language is shown in the drop down box on the  for the inset. For example perl must be specified as .
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Here is a  example
+\par}
+
+{\pard \s7 \qj\sa180\f2\fs20\li360\ri360 /* print_lyx_string - print string, escaping and formatting for LYX */\
+void print_lyx_string(GString *out, char *str, scratch_pad *scratch, short environment) \{\
+    char *tmp;\
+    if (str == NULL)\
+        return;\
+    if (environment == LYX_PLAIN) \{\
+       g_string_append(out,"\\n\\\\begin_layout Plain Layout\\n\\n");\
+    \}   \
+    while (*str != '\\0') \{\
+        switch (*str) \{\
+            case '\\\\':\
+                g_string_append(out,"\\n\\\\backslash\\n\\n");\
+                break;\
+            case '\\"':\
+                  if (environment == LYX_PLAIN)\{\
+                    g_string_append(out,"\\"");\
+                  \} else \{\
+                    g_string_append(out,"\\n\\\\begin_inset Quotes erd\\n\\\\end_inset\\n");\
+                  \}\
+                break;\
+            case '\\n':\
+                 if(environment == LYX_PLAIN) \{\
+                    if (*(str+1) == '\\0')\{ // skip last new line\
+                    break;\
+                    \}\
+                    g_string_append(out,"\\n\\\\end_layout\\n\\n\\\\begin_layout Plain Layout\\n\\n");\
+                \} else \{\
+                    tmp = str;\
+                    tmp--;\
+                    if (*tmp == ' ') \{\
+                        g_string_append(out,"\\n");\
+                    \} else \{\
+                        g_string_append(out, "\\n "); // add a space\
+                    \}\
+                \}\
+                break;\
+            case '<': //  look for HTML comment LaTeX escape\
+                if ( (environment != LYX_CODE) && (environment != LYX_PLAIN) && (strncmp(str,"<!--",4) == 0))\{\
+                   str+=4; // move past delimeter\
+                    g_string_append(out, "\\n\\\\begin_inset ERT\\nstatus open\\n\\n\\\\begin_layout Plain Layout\\n\\n");\
+                    while(strncmp(str,"-->",3) !=0)\{\
+                        switch (*str)\{\
+                          case '\\\\':\
+                            g_string_append(out,"\\n\\\\backslash\\n\\n");\
+                            break;\
+                          case '\\"':\
+                            g_string_append(out,"\\n\\\\begin_inset Quotes erd\\n\\\\end_inset\\n");\
+                            break;\
+                          default: \
+                            g_string_append_c(out,*str);\
+                    \}\
+                        str++;\
+                    \}\
+                    str+=2; // and past the end delimeter\
+                    g_string_append(out,"\\n\\n\\\\end_layout\\n\\\\end_inset\\n");\
+                \}\
+                else \{\
+                    g_string_append_c(out, *str);   \
+                \}\
+                break;\
+            default:\
+                g_string_append_c(out, *str);\
+            \}   \
+        str++;\
+    \}\
+    if (environment == LYX_PLAIN) \{\
+       g_string_append(out,"\\n\\\\end_layout\\n");\
+       \}\
+\}\
+
+\par}
+
+
+{\pard \s2 \f1\fs28\ql\sb240\sa180\i\b {\*\bkmkstart rawlatex}{\*\bkmkend rawlatex}Raw LaTeX\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Raw LaTeX to be included in your LyX document is specified using HTML comments. This is the only HTML that is processed. All other HTML is ignored.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 The LaTeX provided in the HTML comment is presented to LyX as {\i Evil Red Text}, or ERT.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 For example, if you input: 
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 It will appear as: C<!--$\sharp$--> or you will B<!--$\flat$-->
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Beware where you enter Raw LaTeX. If it is in an inconsistent place within your LyX document, LyX may fail to read the file correctly. If it is incorrect LaTeX, or if it isn\'27t supported within the classes you are using, LyX may fail to produce a document.
+\par}
+
+{\pard \s1 \f1\fs32\ql\sb240\sa180\b {\*\bkmkstart tipsandtricks}{\*\bkmkend tipsandtricks}Tips and Tricks\par}
+
+{\pard \s2 \f1\fs28\ql\sb240\sa180\i\b {\*\bkmkstart bewareofhtml}{\*\bkmkend bewareofhtml}Beware of HTML\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Use caution when including any HTML in a document that will be converted to a LyX document. Regular HTML will be ignored so it can be included \'96 but it won\'27t appear in the LyX file or in LyX output. If, though, HTML comments are part of the HTML included, these will be interpreted as LaTeX in which case it is very likely that LyX will not be able to read the file, or that when LyX process the file it will fail to produce any output.
+\par}
+
+{\pard \s2 \f1\fs28\ql\sb240\sa180\i\b {\*\bkmkstart youcanusemanyclasses}{\*\bkmkend youcanusemanyclasses}You can use many classes\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 LyX supports a large number of document classes and generally adjusts to handle those classes. Therefore it is likely that you can use a class that interests you in creating LyX from MultiMarkdown.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 To use a class other than Memoir, simply include as a value in the  metadata entry. Be sure to follow any of the cavorts described in {\field{\*\fldinst{HYPERLINK "#latexmode"}}{\fldrslt {\i Latex Mode}}}. 
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 To be successful you will have to understand the limits of the class. This may require an adjustment to the class hierarchy. You can do this through the use of the  and  metadata entries. 
+\par}
+
+{\pard \s2 \f1\fs28\ql\sb240\sa180\i\b {\*\bkmkstart bewareofdocumentclasslimitations}{\*\bkmkend bewareofdocumentclasslimitations}Beware of document class limitations\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Having said that you can use a number of document classes, you may run into problems with their implementation. You will have to review any LyX error messages if your document does not process correctly.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 For example, in creating this document, using the  class, I wanted to use the title \'93MultiMarkdown to LyX\'94. LyX converts the letters  to the LyX logo in a format that the  environment of this class could not handle and therefore I received LayTeX errors when I tried to print the document.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 My solution was to examine the LayTeX produced to see how the logo is created. I then utilized the raw LayTeX capabilities to create the title. Here is the metadata I used:
+\par}
+
+{\pard \s7 \qj\sa180\f2\fs20\li360\ri360 Title:  MultiMarkdown to <!-- L\\kern-.1667em\\lower.25em\\hbox\{Y\}\\kern-.125emX\\ -->\
+
+\par}
+
+
+{\pard \s0 \qj\sa180\f0\fs24 This resulted in the title you see in the printed document (and the Evil Red Text in LyX).
+\par}
+
+{\pard \s2 \f1\fs28\ql\sb240\sa180\i\b {\*\bkmkstart takeadvantageoflyx}{\*\bkmkend takeadvantageoflyx}Take advantage of LyX\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 Once your document is in LyX, you can take advantage of all of the editing functions available to tune your document. For example should you have decided to use one of the Tufte layouts you might like to use fonts similar to those used in the book. First download and install the Bergamo font{\super\chftn}{\footnote\pard\plain\chtfn {\pard \s0 \qj\sa180\f0\fs24 {\field{\*\fldinst{HYPERLINK "http://www.fontsite.com/2077/bergamo-std/"}}{\fldrslt http://www.fontsite.com/2077/bergamo-std/}}
+\par}
+}.
+\par}
+
+{\pard \s0 \qj\sa180\f0\fs24 When you have converted your document to LyX, in the  paste the following:
+\par}
+
+{\pard \s7 \qj\sa180\f2\fs20\li360\ri360 \\usepackage\{fontspec\}\
+\\setmainfont[Mapping=tex-text,Numbers=OldStyle]\{Bergamo Std\}\
+\\setsansfont[Mapping=tex-text,Numbers=OldStyle,Scale=MatchLowercase]\{Gill Sans MT\}\
+\\setmonofont[Mapping=tex-text,Scale=MatchLowercase]\{DejaVu Sans Mono\}\
+
+\par}
+
+
+{\pard \s0 \qj\sa180\f0\fs24 In addition to changing the fonts, I also overrode the Tufte classes that suppresse numbering (to allow more effective cross-referencing) by including the line:
+\par}
+
+{\pard \s7 \qj\sa180\f2\fs20\li360\ri360 \\setcounter\{secnumdepth\}\{3\}\
+
+\par}
+}
+
