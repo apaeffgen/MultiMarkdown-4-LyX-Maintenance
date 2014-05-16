@@ -14,10 +14,12 @@
 
 #define TABSTOP 4
 
-#define MMD_VERSION "4.5"
+#define MMD_VERSION "4.5.3"
 
 #define MMD_COPYRIGHT \
-	"Copyright (c) 2013 Fletcher T. Penney.\n\n" \
+	"Copyright (c) 2013-2014 Fletcher T. Penney.\n\n" \
+	"LyX export code (c) 2013-2014 Charles R. Cowan,\n" \
+	"licensed under both GPL and MIT licenses.\n\n" \
 	"portions based on peg-markdown - Copyright (c) 2008-2009 John MacFarlane.\n" \
 	"peg-markdown is Licensed under either the GPLv2+ or MIT.\n" \
 	"portions Copyright (c) 2011 Daniel Jalkut, MIT licensed.\n\n" \
@@ -30,16 +32,6 @@
 
 /* This is the type used for the $$ pseudovariable passed to parents */
 #define YYSTYPE node *
-
-/* Define a structure to simplify handling of links */
-struct link_data {
-	char *label;                /* if this is a reference link */
-	char *source;               /* source URL     */
-	char *title;                /* title string   */
-	node *attr;                 /* attribute tree */
-};
-
-typedef struct link_data link_data;
 
 /* This is the data we store in the parser context */
 typedef struct {
@@ -67,6 +59,7 @@ typedef struct {
 	node *links;                 /* ... links */
 	node *glossary;              /* ... glossary */
 	node *citations;             /* ... citations */
+	node *abbreviations;         /* ... abbreviations */
 	node *used_notes;            /* notes that have been referenced */
 	node *result_tree;           /* reference to entire result tree */
 	int   footnote_to_print;     /* set while we are printing so we can reverse link */
@@ -156,6 +149,7 @@ link_data * extract_link_data(char *label, scratch_pad *scratch);
 node * mk_autolink(char *text);
 
 void   extract_references(node *list, scratch_pad *scratch);
+void   extract_abbreviations(node *list, scratch_pad *scratch);
 
 bool   extension(int ext, unsigned long extensions);
 
@@ -165,9 +159,13 @@ void   trim_trailing_newlines(char *str);
 
 /* other utilities */
 char * label_from_string(char *str);
+char * ascii_label_from_string(char *str);
 char * clean_string(char *str);
+char * string_from_node_tree(node *n);
 char * label_from_node_tree(node *n);
 char * label_from_node(node *n);
+char * ascii_label_from_node_tree(node *n);
+char * ascii_label_from_node(node *n);
 void   print_raw_node(GString *out, node *n);
 void   print_raw_node_tree(GString *out, node*n);
 

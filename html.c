@@ -68,8 +68,34 @@ void print_html_node(GString *out, node *n, scratch_pad *scratch) {
 			print_html_node_tree(out,n->children,scratch);
 			break;
 		case STR:
+			/* fprintf(stderr, "str: '%s'\n", n->str); */
 			print_html_string(out,n->str, scratch);
 			break;
+		case ABBR:
+			if (strlen(n->children->str) == 0) {
+				g_string_append_printf(out, "<abbr>");
+			} else {
+				g_string_append_printf(out, "<abbr title=\"");
+				print_html_string(out, n->children->str, scratch);
+				g_string_append_printf(out, "\">");
+			}
+			print_html_string(out,n->str, scratch);
+			g_string_append_printf(out, "</abbr>");
+			break;
+		case ABBRSTART:
+			if (strlen(n->children->str) == 0) {
+				g_string_append_printf(out, "<abbr>");
+			} else {
+				g_string_append_printf(out, "<abbr title=\"");
+				print_html_string(out, n->children->str, scratch);
+				g_string_append_printf(out, "\">");
+			}
+			print_html_string(out,n->str, scratch);
+			break;
+		case ABBRSTOP:
+			print_html_string(out,n->str, scratch);
+			g_string_append_printf(out, "</abbr>");
+			break;		
 		case SPACE:
 			g_string_append_printf(out,"%s",n->str);
 			break;
@@ -153,6 +179,7 @@ void print_html_node(GString *out, node *n, scratch_pad *scratch) {
 		case METADATA:
 			/* Not if snippet only */
 			if (scratch->extensions & EXT_SNIPPET) {
+				is_html_complete_doc(n);
 				print_html_node_tree(out,n->children, scratch);
 				break;
 			}
@@ -216,6 +243,7 @@ void print_html_node(GString *out, node *n, scratch_pad *scratch) {
 				trim_trailing_whitespace(n->children->str);
 				print_raw_node(out, n->children);
 				g_string_append_printf(out, "\n");
+			} else if (strcmp(n->str, "mmdfooter") == 0) {
 			} else {
 				g_string_append_printf(out,"\t<meta name=\"%s\" content=\"",n->str);
 				print_html_node(out,n->children,scratch);
@@ -509,12 +537,12 @@ void print_html_node(GString *out, node *n, scratch_pad *scratch) {
 			}
 			g_string_append_printf(out, " />");
 			if (n->key == IMAGEBLOCK) {
-				if (n->children != NULL) {
+				if ((n->children != NULL) && (n->children->children != NULL) && (n->children->children->str != NULL)) {
 					g_string_append_printf(out, "\n<figcaption>");
 					print_html_node(out,n->children,scratch);
 					g_string_append_printf(out, "</figcaption>");
 				}
-				g_string_append_printf(out,"</figure>");
+				g_string_append_printf(out,"\n</figure>");
 				scratch->padded = 0;
 			}
 
@@ -583,7 +611,7 @@ void print_html_node(GString *out, node *n, scratch_pad *scratch) {
 					lev = note_number_for_label(n->link_data->label, scratch);
 				if (lev != 0) {
 #ifdef DEBUG_ON
-					fprintf(stderr, "matching cite found\n");
+					fprintf(stderr, "matching cite found - %d\n",lev);
 #endif
 					if (scratch->extensions & EXT_RANDOM_FOOT) {
 						srand(scratch->random_seed_base + lev);
@@ -777,6 +805,7 @@ void print_html_node(GString *out, node *n, scratch_pad *scratch) {
 			}
 			if ((n->children != NULL) && (n->children->key == CELLSPAN)) {
 				g_string_append_printf(out, " colspan=\"%d\"",(int)strlen(n->children->str)+1);
+				scratch->table_column += (int)strlen(n->children->str);
 			}
 			g_string_append_printf(out, ">");
 			scratch->padded = 2;
@@ -806,6 +835,7 @@ void print_html_node(GString *out, node *n, scratch_pad *scratch) {
 		case SUBSCRIPT:
 			g_string_append_printf(out, "<sub>%s</sub>",n->str);
 			break;
+		case ABBREVIATION:
 		case KEY_COUNTER:
 			break;
 		default:
@@ -818,17 +848,21 @@ void print_html_node(GString *out, node *n, scratch_pad *scratch) {
 void print_html_endnotes(GString *out, scratch_pad *scratch) {
 	int counter = 0;
 	int random;
-	
-	scratch->used_notes = reverse_list(scratch->used_notes);
+	node *reversed = copy_node_tree(scratch->used_notes);
+
+	reversed = reverse_list(reversed);
+
 	scratch->printing_notes = 1;
 	
-	node *note = scratch->used_notes;
+	node *note = reversed;
 #ifdef DEBUG_ON
 	fprintf(stderr, "start endnotes\n");
 #endif
 	
-	if ((note == NULL) || ((note->key == KEY_COUNTER) && (note->next == NULL)))
+	if ((note == NULL) || ((note->key == KEY_COUNTER) && (note->next == NULL))) {
+		free_node_tree(reversed);
 		return;
+	}
 
 #ifdef DEBUG_ON
 	fprintf(stderr, "there are endnotes to print\n");
@@ -873,6 +907,8 @@ void print_html_endnotes(GString *out, scratch_pad *scratch) {
 	pad(out,1, scratch);
 	g_string_append_printf(out, "</ol>\n</div>\n");
 	scratch->padded = 0;
+
+	free_node_tree(reversed);
 #ifdef DEBUG_ON
 	fprintf(stderr, "finish endnotes\n");
 #endif

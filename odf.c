@@ -74,11 +74,16 @@ void print_odf_node(GString *out, node *n, scratch_pad *scratch) {
 	
 	switch (n->key) {
 		case NO_TYPE:
+		case ABBREVIATION:
 			break;
 		case LIST:
 			print_odf_node_tree(out,n->children,scratch);
 			break;
 		case STR:
+		case ABBR:
+		case ABBRSTART:
+		case ABBRSTOP:
+			/* TODO: Need something a bit better here for abbreviations */
 			print_html_string(out,n->str, scratch);
 			break;
 		case SPACE:
@@ -226,6 +231,7 @@ void print_odf_node(GString *out, node *n, scratch_pad *scratch) {
 			} else if (strcmp(temp, "css") == 0) {
 			} else if (strcmp(temp, "xhtmlheader") == 0) {
 			} else if (strcmp(temp, "htmlheader") == 0) {
+			} else if (strcmp(n->str, "mmdfooter") == 0) {
 			} else if (strcmp(temp, "baseheaderlevel") == 0) {
 				scratch->baseheaderlevel = atoi(n->children->str);
 			} else if (strcmp(temp, "odfheaderlevel") == 0) {
@@ -752,6 +758,7 @@ void print_odf_node(GString *out, node *n, scratch_pad *scratch) {
 			g_string_append_printf(out, "<table:table-cell");
 			if ((n->children != NULL) && (n->children->key == CELLSPAN)) {
 				g_string_append_printf(out, " table:number-columns-spanned=\"%d\"", strlen(n->children->str)+1);
+				scratch->table_column += (int)strlen(n->children->str);
 			}
 			g_string_append_printf(out, ">\n<text:p");
 			if (scratch->cell_type == 'h') {

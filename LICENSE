@@ -1,13 +1,16 @@
 Title:	MultiMarkdown License Agreement
 
 MultiMarkdown
-Copyright (c) 2010-2013 Fletcher T. Penney
+Copyright (c) 2010-2014 Fletcher T. Penney
 
 MultiMarkdown is released under both the GPL and MIT licenses.
 You may pick the license that best fits your needs.
 
 Modifications to remove reliance on Glib2:
 Copyright (c) 2011 Daniel Jalkut, licensed explicitly MIT.
+
+LyX export code (c) 2013-2014 Charles R. Cowan,
+licensed under both GPL and MIT licenses.
 
 Portions based on:
 peg-markdown
