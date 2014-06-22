@@ -473,9 +473,6 @@ bool begin_lyx_output(GString *out, node* list, scratch_pad *scratch) {
 			free(token);
 		} 
 	}
-	if(isbeamer){
-	  g_string_append(out,"beamer-fragile\n");
-	}
 	 g_string_append(out,"\\end_modules\n");
 	
 	g_string_append(out,"\\bibtex_command default\n");
@@ -742,16 +739,26 @@ void print_lyx_node(GString *out, node *n, scratch_pad *scratch, bool no_newline
 					break;
 				case ORDEREDLIST:
 					g_string_append(out, "\n\\begin_layout Enumerate\n");
-					break;
-				case BULLETLIST:
-					g_string_append(out, "\n\\begin_layout Itemize\n");
-					if (scratch-> lyx_beamerbullet){
-					  g_string_append(out,"\n\\begin_inset ERT");
-					  g_string_append(out,"\nstatus collapsed\n");
+			    	if (scratch-> lyx_beamerbullet){
+					  g_string_append(out,"\n\\begin_inset Argument 1");
+					  g_string_append(out,"\nstatus open\n");
 					  g_string_append(out,"\n\\begin_layout Plain Layout");
 					  g_string_append(out,"\n<+->");
 					  g_string_append(out,"\n\\end_layout\n");
 					  g_string_append(out,"\n\\end_inset\n");
+					  scratch -> lyx_beamerbullet = FALSE;
+					}
+					break;
+				case BULLETLIST:
+					g_string_append(out, "\n\\begin_layout Itemize\n");
+					if (scratch-> lyx_beamerbullet){
+					  g_string_append(out,"\n\\begin_inset Argument 1");
+					  g_string_append(out,"\nstatus open\n");
+					  g_string_append(out,"\n\\begin_layout Plain Layout");
+					  g_string_append(out,"\n+-");
+					  g_string_append(out,"\n\\end_layout\n");
+					  g_string_append(out,"\n\\end_inset\n");
+					  scratch -> lyx_beamerbullet = FALSE;
 					}
 					break;
 				case NOTEREFERENCE:
